@@ -1,0 +1,6 @@
+.home__banner{height: 500px; overflow: hidden;}
+
+.home__banner .swiper-container{height: 100%;}
+.home__banner .swiper-wrapper{display: flex;height: 100%;}
+.home__banner .swiper-slide {position: relative;}
+.home__banner .swiper-slide img{height: 100%; object-fit: cover; object-position: bottom;}

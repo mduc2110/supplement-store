@@ -1,0 +1,63 @@
+* {margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}
+img{width: 100%;}
+ul{list-style: none;}
+a{text-decoration: none; color: #232631;}
+a.link{}
+a.link:hover{color: #5d6581;text-decoration: underline;}
+button{outline: none;cursor: pointer;}
+input{padding: 5px; outline: none; width: 100%;}
+input:focus{box-shadow: 0px 1px 2px 0px #d1d4e0;}
+.main__layout{
+    max-width: 1024px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.overlay{
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.btn{
+    padding: 10px 30px;
+    background-color: transparent;
+    border-radius: 50px;
+    outline: none;
+    border: none;
+    border: 1px solid;
+    cursor: pointer;
+    width: 100%;
+}
+.btn__primary{
+    background-color: #333748;
+    color: #fff;
+}
+.btn__primary:hover{background-color: #232631;}
+.btn__dark{
+    background-color: #000;
+    color: #fff;
+}
+.btn__dark:hover{background-color: rgba(0,0,0,0.7);}
+.btn__light{
+    color: #000;
+}
+.btn__light:hover{background-color: rgba(0,0,0,1); color: #fff;}
+.title{font-size: 1.5em; text-align: center; margin: 30px;}
+
+.flex{display: flex; justify-content: space-between;}
+
+.quant{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.quant button{
+    background-color: transparent; 
+    border: 1px solid black; 
+    width: 30px;
+    height: 30px;
+}

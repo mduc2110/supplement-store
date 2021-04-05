@@ -1,0 +1,94 @@
+.overlay{
+    background-color: rgba(255, 255, 255, .3);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+    height: 100vh;
+    /* display: none; */
+}
+
+.add-product{
+    width: 1000px;
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* display: none; */
+}
+
+.add-product form {
+    display: flex;
+    justify-content: space-between;
+}
+.add-product form .left{
+    width: 48%;
+}
+.add-product form .right{
+    width: 48%;
+}
+
+.add-product{}
+.add-product .size-container{
+    display: flex;
+    margin: 0 -.5rem;
+    flex-wrap: wrap;
+}
+.add-product .size-container>*{
+    width: 29.9%;
+    margin: 0 .5rem .5rem;
+}
+.add-product .size-field{
+    position: relative;
+    display: flex;
+    margin-bottom: 0;
+}
+.add-product .size-field button{
+    
+}
+.add-product .size-field input{}
+
+
+.right .img-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -.5rem;
+}
+.right .img-container .thumb{
+    width: 29.94%;
+    margin: 0 .5rem 1rem;
+    overflow: hidden;
+    position: relative;
+}
+.right .img-container .thumb .btn__close{
+    bottom: 0;
+    z-index: 1;
+    top: unset;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.right .img-container .img-box{
+    width: 100%;
+    position: relative;
+    padding-top: 100%;
+}
+.right .img-container .img-box img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.btn__addImg{
+    display: inline-block;
+    width: 100%;
+    border: 1px dashed #6c7293;
+    padding: 8px 19px 11px;
+    background-color: transparent;
+    color: #6c7293;
+    cursor: pointer;
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+.product__detail{
+    margin-top: 50px;
+}
+.product__detail .main__layout{
+    display: flex; 
+    align-items: center;
+    justify-content: space-around;
+}
+.product__detail .main__layout .imgArea{
+    width: 40%;
+}
+.product__detail .main__layout .detailArea{
+    width: 40%;
+}

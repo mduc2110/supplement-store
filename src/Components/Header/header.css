@@ -1,0 +1,36 @@
+.header{height: 60px; background-color: #333748;}
+
+.header .main__layout{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    position: relative;
+}
+.header .main__layout a{
+    color: #fff;
+}
+.header .main__layout .nav__center{
+    /* width: 60%; */
+    display: flex;
+    justify-content: flex-end;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.header .main__layout .nav__center a{
+    text-transform: uppercase;
+    padding: 0 10px;
+}
+
+.header .main__layout .nav__action{
+}
+
+.header .main__layout .nav__action .loginBtn{
+    padding: 7px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+.header .main__layout .nav__action .loginBtn{}

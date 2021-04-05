@@ -1,0 +1,23 @@
+.products_list{display: flex; flex-wrap: wrap; margin: 30px -1%;}
+
+.product__item{width: 23%; margin: 1%;}
+.product__item .thumbnail{
+    position: relative;
+    width: 100%;
+    padding-top: 120%;
+}
+.product__item .thumbnail a{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.product__item .thumbnail a img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.product__item .thumbnail a.add{display: inline-block; width: 15px; height: 15px;}
+.product__item .product__info{}

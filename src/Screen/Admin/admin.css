@@ -1,0 +1,81 @@
+table{width: 100%; border-collapse: collapse;}
+a{color: #fff; text-decoration: none;}
+.adminPage .flex{display: flex; margin: 0 -.875rem;}
+.adminPage .flex>*{margin: 0 0.875rem;}
+.adminPage .flex.flex2{}
+.adminPage .flex.flex2>*{}
+.adminPage .flex.flex3{}
+.adminPage .flex.flex4{}
+
+.adminPage input, .adminPage select, .adminPage option{
+    background: #191c24;
+    padding: 13px 20px 11px 20px;
+    border: 1px solid #2c2e33;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+.adminPage input:active{
+    box-shadow: 1px 1px 1px 1px #191c24;
+}
+
+.btn.btn__admin1{
+    display: inline-block;
+    background-color: rgb(10, 131, 62);
+    color: #fff;
+    border: none;
+    border-radius: .3rem;
+    padding: .6rem;
+    width: fit-content;
+}
+.btn.btn__admin1:hover{background-color: rgba(10, 131, 62, .8);}
+.btn.btn__admin2{
+    background-color: rgb(158, 53, 53);
+    color: #fff;
+    border: none;
+    border-radius: .3rem;
+    padding: .6rem;
+    width: fit-content;
+}
+.btn.btn__close{
+    display: block;
+    background-color: #6c7293;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    padding: 0;
+    color: #fff;
+    font-size: 1em;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(50%, -50%) rotate(45deg);
+}
+.btn.btn__admin2:hover{
+    background-color: rgba(158, 53, 53, .8);
+}
+
+.box-color{
+    background-color: #191c24;
+    border-radius: 0.25rem;
+    padding: 1.75rem 1.5625rem;
+}
+
+.adminPage{
+    display: flex; position: relative;
+    
+    color: #6c7293;
+}
+
+.body-wrapper{
+    width: 100%;
+}
+
+.main-panel{
+    background-color: #000;
+    width: 100%;
+    padding: 1.875rem 1.75rem;
+}
+.main-panel{}
+.main-panel>*{margin-bottom: 1.75rem;}
+.main-panel>*:last-child{margin-bottom: 0}

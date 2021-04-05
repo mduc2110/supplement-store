@@ -1,0 +1,12 @@
+.header-admin{
+    font-weight: normal;
+    background: #191c24;
+    left: 244px;
+    height: 50px;
+}
+
+.header-admin input{
+    background: #191c24;
+    padding: 13px 20px 11px 20px;
+    border: 1px solid #2c2e33;
+}

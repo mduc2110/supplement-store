@@ -1,0 +1,22 @@
+.product-admin{
+    background-color: #191c24;
+    width: 100%;
+    min-width: 100%;
+    border-radius: 0.25rem;
+    padding: 1.75rem 1.5625rem;
+}
+.product-admin table{}
+.product-admin table thead th{
+    text-align: left;
+    padding: 0.9375rem;
+    border-bottom-width: 1px;
+    font-weight: 500;
+}
+.product-admin table tr td{
+    border-top: 1px solid #2c2e33;
+    padding: 0.9375rem;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+}

@@ -1,0 +1,23 @@
+.sidebar{
+    min-height: calc(100vh);
+    background: #191c24;
+    font-weight: normal;
+    padding: 0;
+    width: 244px;
+    z-index: 11;
+    color: #6c7293;
+}
+.sidebar .nav{}
+
+
+.sidebar .nav li a{
+    padding: .5em 2em;
+    display: inline-block;
+    color: #6c7293;
+    border-left: 3px solid #191c24;
+    
+}
+.sidebar .nav li a.active{
+    color: #ffffff;
+    border-left: 3px solid #3e4a92;
+}

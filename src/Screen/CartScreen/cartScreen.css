@@ -1,0 +1,55 @@
+.cart__screen{}
+.cart__screen .main__layout{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cart__screen .main__layout .cartList{
+    width: 70%;
+}
+.cart__screen .main__layout .cartList .cart__item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cart__screen .cartList .cart__item .imgBox{
+    width: 15%;
+}
+.cart__screen .cartList .cart__item .imgBox img{}
+
+.cart__screen .cartList .cart__item .prodDetail{
+    width: 35%;
+}
+.cart__screen .cartList .cart__item .prodDetail h3{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+.cart__screen .cartList .cart__item .prodDetail p{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+
+.cart__screen .cartList .cart__item .quant,
+.cart__screen .cartList .cart__item .price,
+.cart__screen .cartList .cart__item .total{
+    width: 13%;
+}
+
+
+.cart__screen .main__layout .cartList{}
+.cart__screen .main__layout .sumArea{
+    width: 25%;
+    padding: 20px;
+    background-color: #f3f3f3;
+}
+.cart__screen .main__layout .sumArea .sum__title{
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #979797;
+}
+.cart__screen .main__layout .sumArea .flex{margin-bottom: 20px;}

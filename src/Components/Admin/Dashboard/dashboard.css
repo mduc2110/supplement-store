@@ -1,0 +1,10 @@
+.dashboard{}
+.dashboard .display-total{
+    width: 100%;
+}
+.dashboard .display-total h1{
+    color: #fff;
+}
+.dashboard .display-total p{
+    margin-top: 1rem;
+}

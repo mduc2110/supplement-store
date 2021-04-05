@@ -1,0 +1,49 @@
+.login{
+    width: 300px;
+    margin: 100px auto;
+}
+.login form{}
+.login form input{
+    margin-bottom: 20px;
+
+}
+.login form a{
+    font-size: .8em;
+}
+.login form button{
+    border-radius: 0;
+    margin: 5px 0 20px;
+}
+.login>a.link{
+    display: block;
+    text-align: center;
+    font-size: .85em;
+}
+.login>p{
+    margin: 20px auto;
+    position: relative;
+    height: 1px;
+    width: 150px;
+    background-color: #333748;
+}
+.login>p::before{
+    color: #333748;
+    content: 'Or';
+    padding: 0 15px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.login .social__group{
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+.login .social__group a{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 5px 10px;
+}
