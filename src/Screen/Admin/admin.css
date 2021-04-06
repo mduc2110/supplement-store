@@ -1,7 +1,7 @@
 table{width: 100%; border-collapse: collapse;}
 a{color: #fff; text-decoration: none;}
 .adminPage .flex{display: flex; margin: 0 -.875rem;}
-.adminPage .flex>*{margin: 0 0.875rem;}
+.adminPage .flex>*{margin: 0 0.875rem; width: 100%;}
 .adminPage .flex.flex2{}
 .adminPage .flex.flex2>*{}
 .adminPage .flex.flex3{}
@@ -59,6 +59,9 @@ a{color: #fff; text-decoration: none;}
     background-color: #191c24;
     border-radius: 0.25rem;
     padding: 1.75rem 1.5625rem;
+}
+.box-color .title_w{
+    color: #fff;
 }
 
 .adminPage{
