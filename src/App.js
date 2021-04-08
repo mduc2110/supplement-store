@@ -9,9 +9,9 @@ import MainScreen from './Screen/MainScreen';
 import Admin from './Screen/Admin';
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getProducts());
+  // }, []);
   return (
     <div className="App">
       

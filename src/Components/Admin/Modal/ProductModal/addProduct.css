@@ -17,7 +17,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* display: none; */
+}
+.add-product .flex .btn.btn__admin1{
+    width: 100px;
 }
 
 .add-product form {
@@ -91,4 +93,5 @@
     color: #6c7293;
     cursor: pointer;
     text-align: center;
+    margin: 1.4rem 0;
 }

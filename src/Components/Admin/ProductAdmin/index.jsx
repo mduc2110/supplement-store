@@ -2,20 +2,22 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './productAdmin.css'
 import {useSelector, useDispatch} from 'react-redux'
-import AddProduct from '../Modal/AddProduct';
+import ProductModal from '../Modal/ProductModal';
 function ProductAdmin() {
-    const [addProductOpen, setAddProductOpen] = useState(false);
+    const [openModalProduct, setOpenModalProduct] = useState({
+        status: false,
+        type: ""
+    });
     const products = useSelector(state => state.productsReducer);
 
-    console.log(products);
     useEffect(async () => {
         const response = await axios.get("http://localhost:3333/api/products/");
-        console.log(response.data);
+        // console.log(response.data);
     }, []);
     return (
         <>
             <div className="product-admin">
-                <button className="btn btn__admin1" onClick={() => setAddProductOpen(true)}>Create</button>
+                <button className="btn btn__admin1" onClick={() => setOpenModalProduct({status: true, type: "ADD"})}>Create</button>
                 <table className="table">
                     <thead>
                         <tr>
@@ -34,7 +36,7 @@ function ProductAdmin() {
                             <td>{(1233000).toLocaleString("vi")+ " đ"}</td>
                             <td>{(1500000).toLocaleString("vi")+ " đ"}</td>
                             <td>0</td>
-                            <td><button className="btn btn__admin1">Edit</button><button className="btn btn__admin2">Delete</button></td>
+                            <td><button className="btn btn__admin1"  onClick={() => setOpenModalProduct({status: true, type: "EDIT"})}>Edit</button><button className="btn btn__admin2">Delete</button></td>
                         </tr>
                         
                     </tbody>
@@ -46,9 +48,10 @@ function ProductAdmin() {
                 <div className="box-color" style={{width: "100%", height: "300px"}}></div>
                 <div className="box-color" style={{width: "100%", height: "300px"}}></div>
             </div>
-            <AddProduct 
-                isOpen={addProductOpen}
-                closeModal={setAddProductOpen}
+            <ProductModal 
+                isOpen={openModalProduct.status}
+                closeModal={setOpenModalProduct}
+                type={openModalProduct.type}
             />
         </>
     )
