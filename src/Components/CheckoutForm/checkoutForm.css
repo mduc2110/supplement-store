@@ -1,0 +1,22 @@
+.checkout__form{
+    width: 62%;
+}
+input, select{
+    border: none;
+    border-bottom: 2px solid rgb(232, 232, 232);
+    transition: all .3s;
+    margin-bottom: 20px;
+    outline: none;
+    padding: 10px 10px 5px;
+    font-size: 1.2em;
+}
+input:focus, select:focus{
+    border-bottom-color: rgb(179, 179, 179);
+}
+
+.checkout__form .flex.address{
+    margin-top: 10px;
+}
+.checkout__form .flex.address> *{
+    width: 30%;
+}

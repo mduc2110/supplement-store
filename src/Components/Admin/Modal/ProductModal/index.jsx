@@ -1,13 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { getToken } from '../../../../utils/Common';
 import './addProduct.css'
 function AddProduct(props) {
     const [category, setCategory] = useState([]);
-    const [sizeQuant, setSizeQuant] = useState([
+    const [productOptions, setProductOptions] = useState([
         {
             id: 'size-1',
-            opt: "",
             quant: undefined,
+            flavour: ""
         }
     ]);
     const [imgUpload, setImgUpload] = useState([]);
@@ -24,38 +25,15 @@ function AddProduct(props) {
 
     });
     const removeSize = (id) => {
-        console.log(id);
-        const newArr = sizeQuant.filter((item) => {
+        const newArr = productOptions.filter((item) => {
             return item.id != id
         });
-        console.log(newArr);
-        setSizeQuant([
+        setProductOptions([
             ...newArr
         ]);
-        // if(sizeQuant.indexOf(ele) > -1){
-        //     newArr.splice(sizeQuant.indexOf(ele) , 1);
-        //     setSizeQuant([
-        //         ...newArr
-        //     ]);
-        // }
-    }
-
-    const changeOpt = (id, e) =>{
-        console.log(e.target.value);
-        const result = [...sizeQuant].map(ele => {
-            if (ele.id === id) {
-                return {
-                    ...ele,
-                    opt: e.target.value,
-                }
-            }
-            return ele;
-        });
-        setSizeQuant(result)
-
     }
     const changeQuant = (id, e) => {
-        const result = [...sizeQuant].map(ele => {
+        const result = [...productOptions].map(ele => {
             if (ele.id === id) {
                 return {
                     ...ele,
@@ -64,80 +42,59 @@ function AddProduct(props) {
             }
             return ele;
         });
-        setSizeQuant(result)
+        setProductOptions(result)
     }
-
-    // const uploadImage = (e) => {
-    //     const file = e.target.files[0];
-    //     let data = new FormData();
-    //     data.append('')
-    //     if(file){
-    //         setImgUpload([
-    //             ...imgUpload,
-    //             URL.createObjectURL(file)
-    //         ])
-    //     }
-    // }
-    const [formData, setFormData] = useState('');
-    const uploadImage = ({target: {files}}) => {
-        // const file = e.target.files[0];
-        let data = new FormData();
-        data.append('imgUrl', files[0]);
-        data.append('name', files[0].name);
-        setFormData(data);
-        console.log(data);
-        // console.log(files);
-        // console.log(data);
+    const changeFlavour =(id, e) => {
+        const result = [...productOptions].map(ele => {
+            if (ele.id === id) {
+                return {
+                    ...ele,
+                    flavour: e.target.value,
+                }
+            }
+            return ele;
+        });
+        setProductOptions(result)
+    }
+    const handleChangeUploadImg = (e) => {
+        const {files} = e.target;
+        const listImg = [...files].map(item => ({
+            url: URL.createObjectURL(item),
+            file: item
+        }));
+        setImgUpload(listImg);
     }
     const removeImage = (e) => {
         let newArrImg = [...imgUpload];
+ 
         if(newArrImg.indexOf(e) > -1){
             newArrImg.splice(newArrImg.indexOf(e) , 1);
             setImgUpload([
                 ...newArrImg
             ]);
+            
         }
-    }
-    const convertBase64 =(file) => {
-        // const base64 = await convertBase64(file);
-        // console.log(base64);
-        // setImgUpload([
-        //     ...imgUpload,
-        //     base64
-        // ])
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-            fileReader.onerror = (error) => {
-                reject(error);
-            }
-        })
     }
     const addSize = (e) => {
-        if(sizeQuant.length == 6){
+        if(productOptions.length == 4){
             return;
         }
-        if(sizeQuant.length > 0){
-            const newIndex = sizeQuant[sizeQuant.length-1].id.split("-")[1];
-            setSizeQuant([
-                ...sizeQuant, 
+        if(productOptions.length > 0){
+            const newIndex = productOptions[productOptions.length-1].id.split("-")[1];
+            setProductOptions([
+                ...productOptions, 
                 {
                     id: `size-${parseInt(newIndex)+1}`,
-                    opt: "",
-                    quant: 0,
+                    quant: undefined,
+                    flavour: "",
                 }
             ]);
-            // const newIndex = sizeQuant[sizeQuant.length-1].split("-")[1];
-            // setSizeQuant([...sizeQuant, `size-${parseInt(newIndex)+1}`]);
         }else{
-            setSizeQuant([...sizeQuant, 
+            setProductOptions([...productOptions, 
                 {
                     id: `size-1`,
-                    opt: "",
-                    quant: 0,
+                    quant: undefined,
+                    flavour: "",
                 }
             ]);
         }
@@ -152,23 +109,40 @@ function AddProduct(props) {
         }
         
     }, []);
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post("http://localhost:3333/api/products", 
-            {
-                data: formData
-            },
-            {
-                headers: { 
-                    'content-type': 'multipart/form-data' 
-                }
+        const imgFiles = [...imgUpload].map(img => img.file);
+        const options = [...productOptions].map(item => {
+            return JSON.stringify({
+                flavour: item.flavour,
+                quant: item.quant
             });
-            console.log(response);
-        } catch (error) {
-            
-        }
+        });
+        setProduct({
+            ...product,
+            imgUrl: imgFiles,
+            options
+        });
+        console.log(product);
+        const formData = new FormData();
+
+        Object.keys(product).forEach(item => {
+            if(Array.isArray(product[item])){
+                product[item].forEach(arrItem => {
+                    formData.append(item, arrItem);
+                });
+            }else{
+                formData.append(item, product[item]);
+            }
+        });
+        axios.post("http://localhost:3333/api/products",
+        formData,
+        {
+            headers: { 
+                // 'ContentType': 'multipart/form-data',
+                'access-token': getToken()
+            }
+        }).then(res => console.log(res));
     }
     return (
         props.isOpen==true?
@@ -197,10 +171,10 @@ function AddProduct(props) {
 
                         <div className="size-container">
                             {
-                                sizeQuant.map((ele, index) => {
+                                productOptions.map((ele, index) => {
                                     return (
                                         <div className="size-field" key={index} id={ele.id}>
-                                            <input type="text" placeholder="size" value={ele.opt} onChange={(e) => changeOpt(ele.id, e)}/>
+                                            <input type="text" placeholder="flavour"  value={ele.flavour} onChange={(e) => changeFlavour(ele.id, e)}/>
                                             <input type="text" placeholder="quantity" value={ele.quant} onChange={(e) => changeQuant(ele.id, e)}/>
                                             <a className="btn btn__close" onClick={() => removeSize(ele.id)}>+</a>
                                         </div>
@@ -220,7 +194,13 @@ function AddProduct(props) {
                     </div>
                     <div className="right">
                         <label htmlFor="imgFile" className="btn__addImg">Upload img</label>
-                        <input type="file" id="imgFile" onChange={(e) => uploadImage(e)} accept="image/x-png,image/gif,image/jpeg" hidden/>
+                        <input 
+                            type="file" 
+                            id="imgFile" 
+                            onChange={(e) => handleChangeUploadImg(e)} 
+                            accept="image/x-png,image/gif,image/jpeg" 
+                            hidden
+                            multiple/>
                         <div className="img-container">
                             {
                                 imgUpload.map((ele, index) => {
@@ -228,7 +208,7 @@ function AddProduct(props) {
                                         <div className="thumb" key={index}>
                                             <a className="btn btn__close" onClick={() => removeImage(ele)}>+</a>
                                             <div className="img-box">
-                                                <img src={ele} alt=""/>
+                                                <img src={ele.url} alt=""/>
                                             </div>
                                         </div>
                                     )

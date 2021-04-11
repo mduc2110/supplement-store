@@ -7,23 +7,30 @@ import {useDispatch} from 'react-redux';
 
 import MainScreen from './Screen/MainScreen';
 import Admin from './Screen/Admin';
+import axios from 'axios';
+import ProtectedRouteAdmin from '../src/utils/ProtectedRouteAdmin'
+import { getRole } from './utils/Common';
 function App() {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, []);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
+  // axios
+  
   return (
     <div className="App">
       
       
       <Switch>
         {/* <Route exact path="/" component={MainScreen}/> */}
-        <Route exact path="/admin" component={Admin}/>
+        <ProtectedRouteAdmin path="/admin" component={Admin}/>
+        {/* <Route exact path="/admin" component={Admin}/> */}
 
         <Route path="/admin" component={Admin}/>
         <Route path="/" component={MainScreen}/>
+        <Route path="/" component={MainScreen}/>
         
-
+        
       </Switch>
     </div>
   );

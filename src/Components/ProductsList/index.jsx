@@ -5,6 +5,7 @@ import HomeBanner from '../HomeBanner';
 import {useSelector} from 'react-redux';
 function ProductsList() {
     const prodsList = useSelector(state => state.productsReducer);
+    console.log(prodsList);
     // const dispatch = useDispatch();
     
     // useEffect(() => {

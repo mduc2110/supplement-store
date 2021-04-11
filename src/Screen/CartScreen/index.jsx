@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import './cartScreen.css';
-import {increment, decrement} from '../../actions/cart';
+import {increment, decrement, getCart, removeItem } from '../../actions/cart';
 import {useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
-
 function CartScreen() {
     const cart = useSelector(state => state.cartReducer);
-    console.log(cart);
     const dispatch = useDispatch();
-
+    useEffect(() => {
+        dispatch(getCart()) 
+    }, []);
     return (
         <div className="cart__screen">
             <h3 className="title">Your cart</h3>
@@ -17,22 +17,29 @@ function CartScreen() {
                 <div className="cartList">
                 {
                     cart.cartList.length !== 0?
-                        cart.cartList.map(item => (
-                            <div className="cart__item">
+                        cart.cartList.map((item, index) => (
+                            <div className="cart__item" key={index}>
+                                <h3 className="odn__num"><span>{index+1}</span></h3>
                                 <div className="imgBox">
-                                    <img src={item.image} alt=""/>
+                                    <img src={`http://localhost:3333/${item.imgUrl[0]}`} alt=""/>
                                 </div>
                                 <div className="prodDetail">
-                                    <h3>{item.title}</h3>
-                                    <p>{item.description}</p>
+                                    <h3>{item.productName}</h3>
+                                    {/* <p>{item.description}</p> */}
+                                    <p>{item.options.flavour}</p>
                                 </div>
                                 <div className="quant">
-                                    <button className="decre" onClick={() => dispatch(decrement(item.id))}>-</button>
-                                    {item.qty}
-                                    <button className="incre" onClick={() => dispatch(increment(item.id))}>+</button>
+                                    <button className="decre" onClick={() => dispatch(decrement(item._id, item.options.flavour))}>-</button>
+                                    <span>{item.options.quant}</span>
+                                    <button className="incre" onClick={() => dispatch(increment(item._id, item.options.flavour))}>+</button>
                                     </div>
-                                <h3 className="price">{item.price}</h3>
-                                <h3 className="total">{(item.price * item.qty).toFixed(2)}</h3>
+                                <h3 className="price">{(item.price).toLocaleString('vi')}</h3>
+                                <h3 className="total">{(item.price * item.options.quant).toLocaleString('vi')}</h3>
+                                <a href="#"
+                                    className="img__icon"
+                                    onClick={() => dispatch(removeItem(item._id, item.options.flavour))}>
+                                    <img src="/remove.svg" alt=""/>
+                                    </a>
                                 {/* <div className="prodDetail"></div> */}
                             </div>
                         ))
@@ -46,9 +53,9 @@ function CartScreen() {
                     <h3 className="sum__title">ORDER SUMMARY</h3>
                     <div className="flex">
                         <p>Total</p>
-                        <h3>{cart.totalOrder}</h3>
+                        <h3>{(cart.totalOrder).toLocaleString('vi')}</h3>
                     </div>
-                    <button className="btn btn__dark">CHECK OUT</button>
+                    <Link className="btn btn__dark" to="/checkout">CHECK OUT</Link>
                 </div>
             </div>
             <div className="main__layout">

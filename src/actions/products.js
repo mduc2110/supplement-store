@@ -5,7 +5,7 @@ const CREATE = 'CREATE';
 
 export const getProducts = () => async (dispatch) => {
     try {
-        axios.get('https://fakestoreapi.com/products')
+        axios.get('http://localhost:3333/api/products')
         .then(res => {
             dispatch({
                 type: FETCH_PRODUCTS,

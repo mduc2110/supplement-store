@@ -1,12 +1,44 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 import './login.css';
-function Login() {
+import jwt from 'jsonwebtoken';
+function Login(props) {
+    const [loginForm, setLoginForm] = useState({
+        username: '',
+        password: ''
+    });
+    const {username, password} = loginForm;
+    const handleChange = text => e => {
+        setLoginForm({...loginForm, [text]: e.target.value});
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        if(username !== '' && password !== ''){
+            axios.post('http://localhost:3333/api/users/login',{
+                username, password
+            }).then(res => {
+                console.log(res.data);
+                localStorage.setItem("access-token", res.data.token);
+                const {info} = res.data;
+                if(info.roles.roleName == 'MEMBER'){
+                    props.history.push("/");
+                }else {
+                    props.history.push("/admin");
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        }
+        // history.push("/");
+    }
+
     return (
         <div className="login">
             <h3 className="title">Sign in</h3>
-            <form action="">
-                <input type="text" placeholder="Id"/>
-                <input type="password" placeholder="Password"/>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Id" onChange={handleChange('username')} value={username}/>
+                <input type="password" placeholder="Password" onChange={handleChange('password')} value={password}/>
                 <a className="link" href="/forgot">Forget your password?</a>
                 <button className="btn btn__primary">Login</button>
                 

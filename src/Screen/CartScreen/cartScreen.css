@@ -12,6 +12,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: 10px;
+    margin-bottom: 1.2em;
+    position: relative;
+    box-shadow: 10px 13px 14px -6px #ebebeb;
+    
+}
+.cart__screen .main__layout .cartList .cart__item .img__icon{
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 .cart__screen .cartList .cart__item .imgBox{
     width: 15%;
@@ -51,5 +61,9 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid #979797;
+}
+.cart__screen .main__layout .sumArea .btn.btn__dark{
+    width: 100%;
+    display: block;
 }
 .cart__screen .main__layout .sumArea .flex{margin-bottom: 20px;}

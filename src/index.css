@@ -1,7 +1,7 @@
 * {margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;}
 img{width: 100%;}
 ul{list-style: none;}
-a{text-decoration: none; color: #232631;}
+a{text-decoration: none; color: #232631; cursor: pointer;}
 a.link{}
 a.link:hover{color: #5d6581;text-decoration: underline;}
 button{outline: none;cursor: pointer;}
@@ -31,6 +31,7 @@ input:focus{box-shadow: 0px 1px 2px 0px #d1d4e0;}
     border: 1px solid;
     cursor: pointer;
     width: 100%;
+    text-align: center;
 }
 .btn__primary{
     background-color: #333748;
@@ -49,15 +50,23 @@ input:focus{box-shadow: 0px 1px 2px 0px #d1d4e0;}
 .title{font-size: 1.5em; text-align: center; margin: 30px;}
 
 .flex{display: flex; justify-content: space-between;}
-
+.flex.justi-left{justify-content: flex-start;}
 .quant{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: fit-content;
+}
+.quant span{
+    margin: 0 10px;
 }
 .quant button{
     background-color: transparent; 
     border: 1px solid black; 
     width: 30px;
     height: 30px;
+}
+
+.img__icon{
+    width: 20px;
 }
