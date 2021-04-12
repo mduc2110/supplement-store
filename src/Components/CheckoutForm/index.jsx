@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { getToken } from '../../utils/Common';
+import Paypal from '../../utils/Paypal';
 import './checkoutForm.css';
 function CheckoutForm() {
     const [province, setProvince] = useState([]);
@@ -31,40 +32,44 @@ function CheckoutForm() {
     });
     useEffect(async () => {
         const province =  await axios.get('http://localhost:3333/api/address/province');
-        const deliveryAddress = await axios.get('http://localhost:3333/api/delivery-address', {
-            headers: {
-                'access-token': getToken()
-            }
-        });
-        axios.all([province, deliveryAddress])
-        .then(axios.spread((...responses) => {
-            // setProvince
-            setProvince(responses[0].data);
-            setDeliveryAddress(responses[1].data);
-            console.log(responses[1].data);
-            if(deliveryAddress.length > 0){
-                console.log("hihi");
-            }else{
-                console.log("huhuhuhu");
-            }
-            setSelectedP(202);
-        }))
-        .catch(err => console.log(err));
+        // const deliveryAddress = await axios.get('http://localhost:3333/api/delivery-address', {
+        //     headers: {
+        //         'access-token': getToken()
+        //     }
+        // });
+        setProvince(province.data);
+        // axios.all([province, deliveryAddress])
+        // .then(axios.spread((...responses) => {
+        //     // setProvince
+        //     setProvince(responses[0].data);
+        //     setDeliveryAddress(responses[1].data);
+        //     console.log(responses[1].data);
+        // }))
+        // .catch(err => console.log(err));
 
     }, []);
     const getDistrict = (e) => {
         axios.get('http://localhost:3333/api/address/district/'+e.target.value)
         .then(res => setDistrict(res.data))
         .catch(err => console.log(err));
-        setSelectedP(e.target.value);
+        // setSelectedP(e.target.value);
     }
     const getWard = (e) => {
         axios.get('http://localhost:3333/api/address/ward/'+e.target.value)
         .then(res => setWard(res.data))
         .catch(err => console.log(err));
     }
+
+    const transactionSuccess = (data) => {
+        let variables = {
+            cartDetail: [],
+            paymentData: data
+        } 
+        axios.post('http://localhost:3333/api/orders/success-buy', variables)
+    }
     return (
         <div className="checkout__form">
+            <h3>Billing detail</h3>
             <form>
                 <label htmlFor="">Họ và tên</label>
                 <input type="text" value={orderInfo.to_name} onChange={(e) => setOrderInfo({...orderInfo, to_name: e.target.value})}/>
@@ -104,6 +109,9 @@ function CheckoutForm() {
                 <label htmlFor="">Địa chỉ chi tiết</label>
                 <input type="text" value={orderInfo.to_address} onChange={(e) => setOrderInfo({...orderInfo, to_address: e.target.value})}/>
             </form>
+            <h3>Payment method</h3>
+            <Paypal/>
+            
         </div>
     )
 }
