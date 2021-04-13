@@ -13,10 +13,11 @@ function Sidebar() {
                 <li><NavLink to={`${url}/dashboard`}>Dashboard </NavLink></li>
                 <li><NavLink to={`${url}/product`}>Product</NavLink></li>
                 <li><NavLink to={`${url}/account`}>Account</NavLink></li>
+                <li><NavLink to={`${url}/order`}>Order</NavLink></li>
                 <li><NavLink to={`${url}/something`}>HEHHEE</NavLink></li>
             </ul>
         </div>
     )
 }
 
-export default Sidebar
+export default Sidebar;

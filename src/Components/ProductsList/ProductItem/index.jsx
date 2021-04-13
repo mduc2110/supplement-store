@@ -15,7 +15,7 @@ function ProductIem(props) {
             </div>
             <div className="product__info">
                 <h3>{item.productName}</h3>
-                <h4>{parseInt(item.price).toLocaleString('vi')}</h4>
+                <h4>{parseInt(item.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</h4>
             </div>
             
         </div>

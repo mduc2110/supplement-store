@@ -3,12 +3,14 @@ import Dashboard from '../../Components/Admin/Dashboard'
 import ProductAdmin from '../../Components/Admin/ProductAdmin'
 import Sidebar from '../../Components/Admin/Sidebar'
 import HeaderAdmin from '../../Components/Admin/HeaderAdmin'
-
+import Footer from '../../Components/Footer'
 import {Switch, Route, useRouteMatch, NavLink} from 'react-router-dom';
 import './admin.css'
+import OrderAdmin from '../../Components/Admin/OrderAdmin'
 function Admin() {
     const { path, url } = useRouteMatch();
     return (
+        <>
         <div className="adminPage">
             <Sidebar/>
             <div className="body-wrapper">
@@ -17,11 +19,14 @@ function Admin() {
                     <Switch>
                         <Route exact path={`${path}/dashboard`} component={Dashboard}/>
                         <Route exact path={`${path}/product`} component={ProductAdmin}/>
+                        <Route exact path={`${path}/order`} component={OrderAdmin}/>
                         <Route exact path={`${path}/topics`}/>
                     </Switch>
                 </div>
             </div>
         </div>
+        {/* <Footer/> */}
+        </>
     )
 }
 

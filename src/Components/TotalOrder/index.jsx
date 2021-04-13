@@ -1,13 +1,7 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import {increment, decrement, getCart} from '../../actions/cart';
+import React from 'react';
 import './totalOrder.css'
-function TotalOrder() {
-    const cart = useSelector(state => state.cartReducer);
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getCart());
-    },[])
+function TotalOrder(props) {
+    const {cart} = props;
     return (
         <div className="total__order">
             <h2 className="">Tolal order</h2>
@@ -15,7 +9,7 @@ function TotalOrder() {
                 {
                     cart.cartList.map((item, index) => {
                         return (
-                        <div className="item">
+                        <div className="item" key={index}>
                             <div className="item-img">
                                 <div className="thumbnail">
                                     <a href="#">
@@ -27,11 +21,12 @@ function TotalOrder() {
                                 <h3>{item.productName}</h3>
                                 {/* <h3>x {item.qty}</h3> */}
                                 <div className="quant">
-                                    <button className="decre" onClick={() => dispatch(decrement(item._id, item.options.flavour))}>-</button>
+                                    <button className="decre" onClick={() => props.decrement(item._id, item.options.flavour)}>-</button>
                                     <span>{item.options.quant}</span>
-                                    <button className="incre" onClick={() => dispatch(increment(item._id, item.options.flavour))}>+</button>
+                                    {/* <button className="incre" onClick={() => dispatch(increment(item._id, item.options.flavour))}>+</button> */}
+                                    <button className="incre" onClick={() => props.increment(item._id, item.options.flavour)}>+</button>
                                 </div>
-                                <h3>x {item.price * item.options.quant}</h3>
+                                <h3>x {(item.price * item.options.quant).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}$</h3>
                             </div>
                         </div>
                     )})

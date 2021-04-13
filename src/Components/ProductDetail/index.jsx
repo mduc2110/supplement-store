@@ -94,11 +94,11 @@ function ProductDetail(props) {
                         {
                             productDetail.discount == 0
                             ?(
-                                <span className="price">{parseInt(productDetail.price).toLocaleString("vi")}</span>
+                                <span className="price">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</span>
                             ):
                             <>
-                                <span className="oldPrice">{parseInt(productDetail.price).toLocaleString("vi")}</span>
-                                <span className="price">{(parseInt(productDetail.price) - parseInt(productDetail.price)*parseInt(productDetail.discount)/100).toLocaleString("vi")}</span>
+                                <span className="oldPrice">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</span>
+                                <span className="price">{(parseInt(productDetail.price) - parseInt(productDetail.price)*parseInt(productDetail.discount)/100).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</span>
                             </>
                         }
                         {/* <span>{parseInt(productDetail.price).toLocaleString("vi")}</span> */}

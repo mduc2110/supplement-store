@@ -1,4 +1,6 @@
-.cart__screen{}
+.cart__screen{
+    margin-bottom: 18em;
+}
 .cart__screen .main__layout{
     margin-top: 50px;
     display: flex;

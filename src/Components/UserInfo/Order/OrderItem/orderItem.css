@@ -1,0 +1,25 @@
+.orderItem{
+    border: 1px solid rgb(153, 153, 153);
+    margin-bottom: 1.2em;
+}
+.orderItem .flex.item{
+    align-items: stretch;
+    border-bottom: 1px solid #ddd;
+    margin: .5em 1.2em;
+}
+.orderItem .thumbnail{
+    width: 17%;
+}
+.orderItem .thumbnail{
+
+}
+.orderItem .detail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+}
+.orderItem .flex.sum{
+    align-items: center;
+    margin: .5em 1.2em;
+}

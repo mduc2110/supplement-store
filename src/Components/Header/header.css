@@ -23,7 +23,21 @@
     text-transform: uppercase;
     padding: 0 10px;
 }
+.header .main__layout .nav__center a.cart{
+    position: relative;
 
+}
+.header .main__layout .nav__center a.cart .cartCount{
+    position: absolute;
+    top: -10px;
+    right: 0;
+    background-color: brown;
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+}
 .header .main__layout .nav__action{
 }
 

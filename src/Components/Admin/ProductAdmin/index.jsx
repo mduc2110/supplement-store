@@ -1,19 +1,21 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './productAdmin.css'
 import {useSelector, useDispatch} from 'react-redux'
 import ProductModal from '../Modal/ProductModal';
+import { getProducts } from '../../../actions/products';
 function ProductAdmin() {
     const [openModalProduct, setOpenModalProduct] = useState({
         status: false,
         type: ""
     });
     const products = useSelector(state => state.productsReducer);
-
+    const dispatch = useDispatch();
     useEffect(async () => {
-        const response = await axios.get("http://localhost:3333/api/products/");
+        dispatch(getProducts());
+        // const response = await axios.get("http://localhost:3333/api/products/");
         // console.log(response.data);
     }, []);
+    console.log(products);
     return (
         <>
             <div className="product-admin">
@@ -22,22 +24,31 @@ function ProductAdmin() {
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Img</th>
                             <th>Product Name</th>
                             <th>Import price</th>
                             <th>Price</th>
-                            <th>Discount</th>
+                            <th>Weight</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Whey Rule 1</td>
-                            <td>{(1233000).toLocaleString("vi")+ " đ"}</td>
-                            <td>{(1500000).toLocaleString("vi")+ " đ"}</td>
-                            <td>0</td>
-                            <td><button className="btn btn__admin1"  onClick={() => setOpenModalProduct({status: true, type: "EDIT"})}>Edit</button><button className="btn btn__admin2">Delete</button></td>
-                        </tr>
+                        {
+                            products.map((item, index) => (
+                            <tr key={index}>
+                                <td>{index+1}</td>
+                                <td className="imgCell">
+                                    <img src={`http://localhost:3333/${item.imgUrl[0]}`} alt=""/>
+                                </td>
+                                <td>{item.productName}</td>
+                                <td>{parseInt(item.importPrice).toLocaleString(undefined, {minimumFractionDigits:2})}</td>
+                                <td>{parseInt(item.price).toLocaleString(undefined, {minimumFractionDigits:2})}</td>
+                                <td>{item.weight}</td>
+                                <td><button className="btn btn__admin1"  onClick={() => setOpenModalProduct({status: true, type: "EDIT"})}>Edit</button><button className="btn btn__admin2">Delete</button></td>
+                            </tr>
+                            ))
+                        }
+                        
                         
                     </tbody>
                 </table>

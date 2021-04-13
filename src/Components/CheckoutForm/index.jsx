@@ -3,33 +3,22 @@ import React, { useEffect, useState } from 'react'
 import { getToken } from '../../utils/Common';
 import Paypal from '../../utils/Paypal';
 import './checkoutForm.css';
-function CheckoutForm() {
+function CheckoutForm(props) {
+    const {cart} = props;
     const [province, setProvince] = useState([]);
     const [district, setDistrict] = useState([]);
     const [ward, setWard] = useState([]);
-    const [deliveryAddress, setDeliveryAddress] = useState({});
-
-    const [selectedP, setSelectedP] = useState();
-    console.log(selectedP);
     const [orderInfo, setOrderInfo] = useState({
-        payment_type_id: 0,
+        payment_method: "COD",
         note: "",
         to_name: "",
-        to_phone: "",
-        to_address: "",
-        to_ward_code: 0,
-        to_district_id: 0,
-        cod_amount: 0,
-
-        weight: 0,
-        length: 0,
-        width: 0,
-        height: 0,
-        service_id: 0,
-        service_type_id: 0,
-        pick_shift: [2],
-        items: []
+        phone: "",
+        address: "",
+        ward: { id: 0, name: ""},
+        district: { id: 0,name: ""},
+        province: { id: 0,name: ""}
     });
+    console.log(cart);
     useEffect(async () => {
         const province =  await axios.get('http://localhost:3333/api/address/province');
         // const deliveryAddress = await axios.get('http://localhost:3333/api/delivery-address', {
@@ -48,43 +37,94 @@ function CheckoutForm() {
         // .catch(err => console.log(err));
 
     }, []);
-    const getDistrict = (e) => {
-        axios.get('http://localhost:3333/api/address/district/'+e.target.value)
-        .then(res => setDistrict(res.data))
-        .catch(err => console.log(err));
-        // setSelectedP(e.target.value);
+    const changeProvince = async (e) => {
+        const index = e.target.selectedIndex;
+        const res = await axios.get('http://localhost:3333/api/address/district/'+e.target.value);
+        setDistrict(res.data);
+        setOrderInfo({
+            ...orderInfo,
+            province: {
+                id: e.target.value,
+                name: e.target[index].text
+            }
+        });
     }
-    const getWard = (e) => {
-        axios.get('http://localhost:3333/api/address/ward/'+e.target.value)
-        .then(res => setWard(res.data))
-        .catch(err => console.log(err));
+    const changeDistrict = async (e) => {
+        const index = e.target.selectedIndex;
+        const res = await axios.get('http://localhost:3333/api/address/ward/'+e.target.value)
+        setWard(res.data);
+        setOrderInfo({
+            ...orderInfo,
+            district: {
+                id: e.target.value,
+                name: e.target[index].text
+            }
+        });
+    }
+    const changeWard = async (e) => {
+        const index = e.target.selectedIndex;
+        setOrderInfo({
+            ...orderInfo,
+            ward: {
+                id: e.target.value,
+                name: e.target[index].text
+            }
+        });
     }
 
-    const transactionSuccess = (data) => {
-        let variables = {
-            cartDetail: [],
-            paymentData: data
-        } 
-        axios.post('http://localhost:3333/api/orders/success-buy', variables)
+    const transactionSuccess = async (data) => {
+        try {
+            const items = cart.cartList.map(item => {
+                return {
+                    imgUrl: item.imgUrl,
+                    name: item.productName,
+                    code: item._id,
+                    quantity: item.options.quant,
+                    price: item.price,
+                    weight: item.weight,
+                    options: item.options.flavour,
+                    category: {
+                        level1: item.categories.cateName
+                    }
+                }
+            });
+            const total_amount = cart.totalOrder;
+            const postData = {
+                ...orderInfo,
+                items,
+                total_amount
+            }
+            const response = await axios.post('http://localhost:3333/api/orders/', 
+            postData, {
+                headers: {
+                    'access-token': getToken()
+                }
+            })
+        } catch (error) {
+            
+        }
+        
     }
+    const transactionError = () => {}
+    const transactionCanceled = () => {}
     return (
         <div className="checkout__form">
-            <h3>Billing detail</h3>
+            <h3 className="checkoutTitle">Billing detail</h3>
             <form>
-                <label htmlFor="">Họ và tên</label>
+                <label htmlFor="">Full name *</label>
                 <input type="text" value={orderInfo.to_name} onChange={(e) => setOrderInfo({...orderInfo, to_name: e.target.value})}/>
-                <label htmlFor="">Số điện thoại</label>
-                <input type="text" value={orderInfo.to_phone} onChange={(e) => setOrderInfo({...orderInfo, to_phone: e.target.value})}/>
-                <label htmlFor="">Địa chỉ</label>
+                <label htmlFor="">Number phone *</label>
+                <input type="text" value={orderInfo.phone} onChange={(e) => setOrderInfo({...orderInfo, phone: e.target.value})}/>
+                <label htmlFor="">Address *</label>
                 <div className="flex address">
-                    <select name="" id="" onChange={getDistrict} value={selectedP}>
+                    <select name="" id="" onChange={changeProvince}>
                     {
                         province.map((ele, index) => {
                             return (<option value={ele.ProvinceID} key={index}>{ele.ProvinceName}</option>)
                         })
                     }
                     </select>
-                    <select name="" id="" onChange={getWard}>
+                    <select name="" id="" onChange={changeDistrict}>
                     {
                         district?
                         district.map((ele, index) => {
@@ -95,9 +135,9 @@ function CheckoutForm() {
                     </select>
                     {
                         ward?
-                        <select name="" id="">{
+                        <select name="" id="" onChange={changeWard}>{
                             ward.map((ele, index) => {
-                                return (<option value={ele.WardID} key={index}>{ele.WardName}</option>)
+                                return (<option value={ele.WardCode} key={index}>{ele.WardName}</option>)
                             })
                             
                         }
@@ -106,14 +146,44 @@ function CheckoutForm() {
                     }
                 
                 </div>
-                <label htmlFor="">Địa chỉ chi tiết</label>
-                <input type="text" value={orderInfo.to_address} onChange={(e) => setOrderInfo({...orderInfo, to_address: e.target.value})}/>
+                <label htmlFor="">Detail address *</label>
+                <input type="text" value={orderInfo.address} onChange={(e) => setOrderInfo({...orderInfo, address: e.target.value})}/>
+                <label htmlFor="">Note</label>
+                <input type="text" value={orderInfo.note} onChange={(e) => setOrderInfo({...orderInfo, note: e.target.value})}/>
+                <h3 className="checkoutTitle">Payment method</h3>
+                <div className="flex" style={{justifyContent: 'flex-start', width: '30%', alignItems: 'center'}}>
+                    <input type="radio"
+                    value='PAYPAL'
+                    checked={orderInfo.payment_method === 'PAYPAL'}
+                    onChange={(e) => setOrderInfo({...orderInfo, payment_method: e.target.value})}
+                    />
+                    <label htmlFor="">Paypal</label>
+                    <input type="radio"
+                    value='COD'
+                    checked={orderInfo.payment_method === 'COD'}
+                    onChange={(e) => setOrderInfo({...orderInfo, payment_method: e.target.value})}
+                    />
+                    <label htmlFor="">COD</label>
+                </div>
             </form>
-            <h3>Payment method</h3>
-            <Paypal/>
-            
+            <div className="btnGroup">
+                {
+                    orderInfo.payment_method === 'COD'
+                    ?<button 
+                    onClick={transactionSuccess}
+                    className="btn btn__dark"
+                    >Checkout</button>
+                    :<Paypal
+                    toPay={cart.totalOrder}
+                    onSuccess={transactionSuccess}
+                    transactionError={transactionError}
+                    transactionCanceled={transactionCanceled}
+                    />
+                }
+            </div>
+           
         </div>
     )
 }
 
-export default CheckoutForm
+export default CheckoutForm;

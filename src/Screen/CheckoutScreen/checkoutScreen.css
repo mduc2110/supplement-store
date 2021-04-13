@@ -1,6 +1,7 @@
 
 .checkout__screen{}
 .checkout__screen .main__layout{
+    align-items: flex-start;
     display: flex;
     justify-content: space-between;
     margin-top: 30px;

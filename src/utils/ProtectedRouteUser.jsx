@@ -3,7 +3,6 @@ import { Redirect, Route } from 'react-router'
 import { getToken } from './Common'
 
 function ProtectedRouteUser({component: Component, ...rest}) {
-    console.log(getToken());
     return (
         <Route {...rest}
             render={(props) => {

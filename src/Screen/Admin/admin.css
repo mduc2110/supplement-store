@@ -9,13 +9,33 @@ a{color: #fff; text-decoration: none;}
 
 .adminPage input, .adminPage select, .adminPage option{
     background: #191c24;
-    padding: 13px 20px 11px 20px;
+    padding: 7px 15px 7px 15px;
     border: 1px solid #2c2e33;
     color: #fff;
-    margin-bottom: 1rem;
+    margin-bottom: .9rem;
+    font-size: .87em;
 }
 .adminPage input:active{
     box-shadow: 1px 1px 1px 1px #191c24;
+}
+
+.adminPage table{}
+.adminPage table thead th{
+    text-align: left;
+    padding: 0.9375rem;
+    border-bottom-width: 1px;
+    font-weight: 500;
+}
+.adminPage table tr td{
+    border-top: 1px solid #2c2e33;
+    padding: 0.9375rem;
+    vertical-align: middle;
+    font-size: 0.875rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+.adminPage table .imgCell{
+    width: 10%;
 }
 
 .btn.btn__admin1{
@@ -82,3 +102,4 @@ a{color: #fff; text-decoration: none;}
 .main-panel{}
 .main-panel>*{margin-bottom: 1.75rem;}
 .main-panel>*:last-child{margin-bottom: 0}
+

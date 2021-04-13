@@ -1,6 +1,6 @@
-const productsReducer = (state = [], action) => {
+const ordersReducer = (state = [], action) => {
     switch (action.type) {
-        case 'FETCH_ALL':
+        case 'GET_ORDER':
             return action.payload;
         case 'CREATE':
             return [...state, action.payload];
@@ -9,4 +9,4 @@ const productsReducer = (state = [], action) => {
     }
 }
 
-export default productsReducer;
+export default ordersReducer;

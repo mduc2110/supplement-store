@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { getToken } from '../../../../utils/Common';
+import { useDispatch } from 'react-redux';
+import { createProduct } from '../../../../actions/products';
 import './addProduct.css'
 function AddProduct(props) {
     const [category, setCategory] = useState([]);
@@ -11,6 +12,7 @@ function AddProduct(props) {
             flavour: ""
         }
     ]);
+    const dispatch = useDispatch();
     const [imgUpload, setImgUpload] = useState([]);
     const [product, setProduct] = useState({
         productName: "",
@@ -21,8 +23,8 @@ function AddProduct(props) {
         brand: "",
         options: [],
         imgUrl: [],
-        categoryId: 0
-
+        categoryId: 0,
+        weight: ""
     });
     const removeSize = (id) => {
         const newArr = productOptions.filter((item) => {
@@ -118,31 +120,24 @@ function AddProduct(props) {
                 quant: item.quant
             });
         });
-        setProduct({
+        const data = {
             ...product,
             imgUrl: imgFiles,
             options
-        });
-        console.log(product);
+        };
         const formData = new FormData();
 
-        Object.keys(product).forEach(item => {
-            if(Array.isArray(product[item])){
-                product[item].forEach(arrItem => {
+        Object.keys(data).forEach(item => {
+            if(Array.isArray(data[item])){
+                data[item].forEach(arrItem => {
                     formData.append(item, arrItem);
                 });
             }else{
-                formData.append(item, product[item]);
+                formData.append(item, data[item]);
             }
         });
-        axios.post("http://localhost:3333/api/products",
-        formData,
-        {
-            headers: { 
-                // 'ContentType': 'multipart/form-data',
-                'access-token': getToken()
-            }
-        }).then(res => console.log(res));
+        dispatch(createProduct(formData));
+        props.closeModal(false);
     }
     return (
         props.isOpen==true?
@@ -167,8 +162,9 @@ function AddProduct(props) {
                         <input type="text" value={product.discount} onChange={(e) => setProduct({...product, discount: e.target.value})}/>
                         <label htmlFor="">Brand</label>
                         <input type="text" value={product.brand} onChange={(e) => setProduct({...product, brand: e.target.value})}/>
+                        <label htmlFor="">Weight</label>
+                        <input type="text" value={product.weight} onChange={(e) => setProduct({...product, weight: e.target.value})}/>
                         <label htmlFor="">Size <a className="btn btn__admin1" onClick={addSize}>+</a></label>
-
                         <div className="size-container">
                             {
                                 productOptions.map((ele, index) => {

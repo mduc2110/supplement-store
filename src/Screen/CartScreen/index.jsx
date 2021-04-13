@@ -10,6 +10,7 @@ function CartScreen() {
     useEffect(() => {
         dispatch(getCart()) 
     }, []);
+    console.log(cart.totalOrder);
     return (
         <div className="cart__screen">
             <h3 className="title">Your cart</h3>
@@ -33,8 +34,8 @@ function CartScreen() {
                                     <span>{item.options.quant}</span>
                                     <button className="incre" onClick={() => dispatch(increment(item._id, item.options.flavour))}>+</button>
                                     </div>
-                                <h3 className="price">{(item.price).toLocaleString('vi')}</h3>
-                                <h3 className="total">{(item.price * item.options.quant).toLocaleString('vi')}</h3>
+                                <h3 className="price">{(item.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</h3>
+                                <h3 className="total">{(item.price * item.options.quant).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</h3>
                                 <a href="#"
                                     className="img__icon"
                                     onClick={() => dispatch(removeItem(item._id, item.options.flavour))}>
@@ -53,7 +54,7 @@ function CartScreen() {
                     <h3 className="sum__title">ORDER SUMMARY</h3>
                     <div className="flex">
                         <p>Total</p>
-                        <h3>{(cart.totalOrder).toLocaleString('vi')}</h3>
+                        <h3>{(cart.totalOrder).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</h3>
                     </div>
                     <Link className="btn btn__dark" to="/checkout">CHECK OUT</Link>
                 </div>

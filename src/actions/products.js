@@ -1,4 +1,5 @@
 import axios from "axios"
+import { getToken } from "../utils/Common";
 
 const FETCH_PRODUCTS = 'FETCH_ALL';
 const CREATE = 'CREATE';
@@ -17,8 +18,13 @@ export const getProducts = () => async (dispatch) => {
     }
 }
 export const createProduct = (product) => async (dispatch) => {
+
     try {
-        axios.post('https://localhost:3333/api/products', product)
+        axios.post('http://localhost:3333/api/products', product, {
+            headers: {
+                'access-token': getToken()
+            }
+        })
         .then(res => {
             dispatch({
                 type: CREATE,
