@@ -1,8 +1,7 @@
-import axios from 'axios'
+
 import React, { useEffect, useState } from 'react'
 import './order.css'
 import OrderItem from './OrderItem'
-import {getToken} from '../../../utils/Common'
 import { useParams } from 'react-router'
 import Loader from '../../Loader'
 function Order(props) {

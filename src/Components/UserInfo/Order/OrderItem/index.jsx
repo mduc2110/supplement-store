@@ -1,9 +1,7 @@
 import React from 'react'
-import { useParams } from 'react-router';
 import './orderItem.css';
 function OrderItem(props) {
-    const {status} = useParams();
-    const {stt, item} = props;
+    const {item} = props;
     return (
         <div className="orderItem">
             {

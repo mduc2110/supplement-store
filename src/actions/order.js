@@ -1,6 +1,4 @@
-import axios from "axios";
 import orderApi from "../api/orderApi";
-import { getToken } from "../utils/Common";
 
 const GET_ORDER = 'GET_ORDER';
 const UPDATE_ORDER = 'UPDATE_ORDER';

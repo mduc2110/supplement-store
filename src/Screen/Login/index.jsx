@@ -19,7 +19,7 @@ function Login(props) {
             }).then(res => {
                 localStorage.setItem("access-token", res.data.token);
                 const {info} = res.data;
-                if(info.roles.roleName == 'MEMBER'){
+                if(info.roles.roleName === 'MEMBER'){
                     props.history.push("/");
                 }else {
                     props.history.push("/admin/dashboard");
@@ -44,8 +44,8 @@ function Login(props) {
             <a className="link" href="/signup">Create account</a>
             <p></p>
             <div className="social__group">
-                <a href=""><img src="https://www.flaticon.com/svg/vstatic/svg/1384/1384053.svg?token=exp=1616952807~hmac=b92b2ebb7dd9544ba56f0761f3c89319" alt=""/></a>
-                <a href=""><img src="https://www.flaticon.com/svg/vstatic/svg/732/732200.svg?token=exp=1616952846~hmac=d4203cf02bca9f33b2eacaf8b64a80d7" alt=""/></a>
+                <a href="#"><img src="https://www.flaticon.com/svg/vstatic/svg/1384/1384053.svg?token=exp=1616952807~hmac=b92b2ebb7dd9544ba56f0761f3c89319" alt=""/></a>
+                <a href="#"><img src="https://www.flaticon.com/svg/vstatic/svg/732/732200.svg?token=exp=1616952846~hmac=d4203cf02bca9f33b2eacaf8b64a80d7" alt=""/></a>
             </div>
             
         </div>

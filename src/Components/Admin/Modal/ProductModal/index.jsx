@@ -28,7 +28,7 @@ function AddProduct(props) {
     });
     const removeSize = (id) => {
         const newArr = productOptions.filter((item) => {
-            return item.id != id
+            return item.id !== id
         });
         setProductOptions([
             ...newArr
@@ -140,7 +140,7 @@ function AddProduct(props) {
         // props.closeModal(false);
     }
     return (
-        props.isOpen==true?
+        props.isOpen===true?
         <>
             <div className="overlay" onClick={() => props.closeModal(false)}></div>
             <div className="add-product box-color">
@@ -211,7 +211,7 @@ function AddProduct(props) {
                                 })
                             }
                             {
-                                props.type=="ADD"?
+                                props.type==="ADD"?
                                 <button className="btn btn__admin1" type="submit">+ Create</button>
                                 :<button className="btn btn__admin1" type="submit">Update</button>
                             }

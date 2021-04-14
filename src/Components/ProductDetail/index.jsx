@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import axios from 'axios';
 import './productDetail.css'
 import Loader from '../Loader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {addCart} from '../../actions/cart';
 import productApi from '../../api/productApi';
 
@@ -12,8 +11,8 @@ function ProductDetail(props) {
     const {prodId} = useParams();
     const [productDetail, setProductDetail] = useState([]);
 
-    const prodsList = useSelector(state => state.productsReducer);
-    const cart = useSelector(state => state.cartReducer);
+    // const prodsList = useSelector(state => state.productsReducer);
+    // const cart = useSelector(state => state.cartReducer);
 
     const [selectedOption, setSelectedOption] = useState({
         flavour: "",
@@ -34,7 +33,7 @@ function ProductDetail(props) {
     }, [])
 
     const handleAddToCart = (id) => {
-        if(selectedOption.flavour == "") alert("Select a option")
+        if(selectedOption.flavour === "") alert("Select a option")
         else{
             const option = {
                 flavour: selectedOption.flavour,
@@ -63,7 +62,7 @@ function ProductDetail(props) {
                 quant: selectedOption.quant + 1
             })
         }
-        if(selectedOption.flavour == "") alert("Select a option")
+        if(selectedOption.flavour === "") alert("Select a option")
     }
     const decreQuant = () => {
         if(selectedOption.quant > 1){
@@ -72,7 +71,7 @@ function ProductDetail(props) {
                 quant: selectedOption.quant - 1
             })
         }
-        if(selectedOption.flavour == "") alert("Select a option")
+        if(selectedOption.flavour === "") alert("Select a option")
     }
     const handleSelectOption = (flavour, quant) => {
         setSelectedOption({
@@ -93,7 +92,7 @@ function ProductDetail(props) {
                     <div className="detailArea">
                         <h2>{productDetail.productName}</h2>
                         {
-                            productDetail.discount == 0
+                            productDetail.discount === 0
                             ?(
                                 <span className="price">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</span>
                             ):
@@ -112,7 +111,7 @@ function ProductDetail(props) {
                             </div>
                             <span style={{marginLeft: "1.2em"}}>
                                 {
-                                    selectedOption.flavour==""?null
+                                    selectedOption.flavour===""?null
                                     :<>
                                         <span>{selectedOption.flavour}  </span>
                                         <i>({selectedOption.maxLength} products left)</i>

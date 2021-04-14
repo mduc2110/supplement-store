@@ -3,7 +3,6 @@ import Dashboard from '../../Components/Admin/Dashboard'
 import ProductAdmin from '../../Components/Admin/ProductAdmin'
 import Sidebar from '../../Components/Admin/Sidebar'
 import HeaderAdmin from '../../Components/Admin/HeaderAdmin'
-import Footer from '../../Components/Footer'
 import {Switch, Route, useRouteMatch, NavLink} from 'react-router-dom';
 import './admin.css'
 import OrderAdmin from '../../Components/Admin/OrderAdmin'
@@ -25,7 +24,6 @@ function Admin() {
                 </div>
             </div>
         </div>
-        {/* <Footer/> */}
         </>
     )
 }
