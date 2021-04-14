@@ -103,7 +103,7 @@ function AddProduct(props) {
     }
     useEffect(async () => {
         try {
-            const response = await axios.get("http://localhost:3333/api/categories");
+            const response = await axios.get("https://supplements-soa.herokuapp.com/api/categories");
             setCategory(response.data);
             setProduct({...product, categoryId: category[0]._id});
         } catch (error) {
@@ -137,7 +137,7 @@ function AddProduct(props) {
             }
         });
         dispatch(createProduct(formData));
-        props.closeModal(false);
+        // props.closeModal(false);
     }
     return (
         props.isOpen==true?

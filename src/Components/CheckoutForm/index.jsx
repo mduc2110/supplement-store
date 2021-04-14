@@ -1,9 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { removeItem } from '../../actions/cart';
 import { getToken } from '../../utils/Common';
 import Paypal from '../../utils/Paypal';
 import './checkoutForm.css';
 function CheckoutForm(props) {
+    const history = useHistory();
     const {cart} = props;
     const [province, setProvince] = useState([]);
     const [district, setDistrict] = useState([]);
@@ -18,28 +22,14 @@ function CheckoutForm(props) {
         district: { id: 0,name: ""},
         province: { id: 0,name: ""}
     });
-    console.log(cart);
     useEffect(async () => {
-        const province =  await axios.get('http://localhost:3333/api/address/province');
-        // const deliveryAddress = await axios.get('http://localhost:3333/api/delivery-address', {
-        //     headers: {
-        //         'access-token': getToken()
-        //     }
-        // });
+        const province =  await axios.get('https://supplements-soa.herokuapp.com/api/address/province');
         setProvince(province.data);
-        // axios.all([province, deliveryAddress])
-        // .then(axios.spread((...responses) => {
-        //     // setProvince
-        //     setProvince(responses[0].data);
-        //     setDeliveryAddress(responses[1].data);
-        //     console.log(responses[1].data);
-        // }))
-        // .catch(err => console.log(err));
 
     }, []);
     const changeProvince = async (e) => {
         const index = e.target.selectedIndex;
-        const res = await axios.get('http://localhost:3333/api/address/district/'+e.target.value);
+        const res = await axios.get('https://supplements-soa.herokuapp.com/api/address/district/'+e.target.value);
         setDistrict(res.data);
         setOrderInfo({
             ...orderInfo,
@@ -51,7 +41,7 @@ function CheckoutForm(props) {
     }
     const changeDistrict = async (e) => {
         const index = e.target.selectedIndex;
-        const res = await axios.get('http://localhost:3333/api/address/ward/'+e.target.value)
+        const res = await axios.get('https://supplements-soa.herokuapp.com/api/address/ward/'+e.target.value)
         setWard(res.data);
         setOrderInfo({
             ...orderInfo,
@@ -76,6 +66,7 @@ function CheckoutForm(props) {
         try {
             const items = cart.cartList.map(item => {
                 return {
+                    _id: item._id,
                     imgUrl: item.imgUrl,
                     name: item.productName,
                     code: item._id,
@@ -94,12 +85,13 @@ function CheckoutForm(props) {
                 items,
                 total_amount
             }
-            const response = await axios.post('http://localhost:3333/api/orders/', 
+            const response = await axios.post('https://supplements-soa.herokuapp.com/api/orders/', 
             postData, {
                 headers: {
                     'access-token': getToken()
                 }
-            })
+            });
+            history.push("/info/Pending");
         } catch (error) {
             
         }

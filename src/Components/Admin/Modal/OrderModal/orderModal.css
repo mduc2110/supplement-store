@@ -1,0 +1,17 @@
+.edit-order{
+    width: 1000px;
+    position: fixed;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.edit-order>.flex{
+    align-items: center;
+    justify-content: flex-end;
+}
+.edit-order>.flex>*{width: fit-content;}
+
+.edit-order .cap{color: #c8cce0;}
+
+.edit-order .order-info{margin-bottom: .4em;}

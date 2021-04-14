@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import './login.css';
-import jwt from 'jsonwebtoken';
 function Login(props) {
     const [loginForm, setLoginForm] = useState({
         username: '',
@@ -15,19 +14,18 @@ function Login(props) {
     const handleSubmit = e => {
         e.preventDefault();
         if(username !== '' && password !== ''){
-            axios.post('http://localhost:3333/api/users/login',{
+            axios.post('https://supplements-soa.herokuapp.com/api/users/login',{
                 username, password
             }).then(res => {
-                console.log(res.data);
                 localStorage.setItem("access-token", res.data.token);
                 const {info} = res.data;
                 if(info.roles.roleName == 'MEMBER'){
                     props.history.push("/");
                 }else {
-                    props.history.push("/admin");
+                    props.history.push("/admin/dashboard");
                 }
             }).catch(error => {
-                console.log(error);
+                console.log(error.message);
             });
         }
         // history.push("/");

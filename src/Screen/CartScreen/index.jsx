@@ -10,7 +10,6 @@ function CartScreen() {
     useEffect(() => {
         dispatch(getCart()) 
     }, []);
-    console.log(cart.totalOrder);
     return (
         <div className="cart__screen">
             <h3 className="title">Your cart</h3>
@@ -22,7 +21,7 @@ function CartScreen() {
                             <div className="cart__item" key={index}>
                                 <h3 className="odn__num"><span>{index+1}</span></h3>
                                 <div className="imgBox">
-                                    <img src={`http://localhost:3333/${item.imgUrl[0]}`} alt=""/>
+                                    <img src={`https://supplements-soa.herokuapp.com/${item.imgUrl[0]}`} alt=""/>
                                 </div>
                                 <div className="prodDetail">
                                     <h3>{item.productName}</h3>

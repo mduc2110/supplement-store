@@ -13,7 +13,7 @@ function TotalOrder(props) {
                             <div className="item-img">
                                 <div className="thumbnail">
                                     <a href="#">
-                                        <img src={`http://localhost:3333/${item.imgUrl[0]}`} alt=""/>
+                                        <img src={`https://supplements-soa.herokuapp.com/${item.imgUrl[0]}`} alt=""/>
                                     </a>
                                 </div>
                             </div>

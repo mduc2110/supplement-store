@@ -3,19 +3,17 @@ import './productAdmin.css'
 import {useSelector, useDispatch} from 'react-redux'
 import ProductModal from '../Modal/ProductModal';
 import { getProducts } from '../../../actions/products';
+import Loader from '../../Loader';
 function ProductAdmin() {
     const [openModalProduct, setOpenModalProduct] = useState({
         status: false,
         type: ""
     });
-    const products = useSelector(state => state.productsReducer);
+    const productState = useSelector(state => state.productsReducer);
     const dispatch = useDispatch();
     useEffect(async () => {
         dispatch(getProducts());
-        // const response = await axios.get("http://localhost:3333/api/products/");
-        // console.log(response.data);
     }, []);
-    console.log(products);
     return (
         <>
             <div className="product-admin">
@@ -34,11 +32,12 @@ function ProductAdmin() {
                     </thead>
                     <tbody>
                         {
-                            products.map((item, index) => (
+                            productState.loading?<Loader/>
+                            :productState.products.map((item, index) => (
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td className="imgCell">
-                                    <img src={`http://localhost:3333/${item.imgUrl[0]}`} alt=""/>
+                                   <img src={`https://supplements-soa.herokuapp.com/${item.imgUrl[0]}`} alt=""/>
                                 </td>
                                 <td>{item.productName}</td>
                                 <td>{parseInt(item.importPrice).toLocaleString(undefined, {minimumFractionDigits:2})}</td>

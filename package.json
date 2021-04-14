@@ -13,6 +13,8 @@
     "ra-data-simple-rest": "^3.13.4",
     "react": "^17.0.2",
     "react-admin": "^3.14.2",
+    "react-datepicker": "^3.7.0",
+    "react-datetime-picker": "^3.2.0",
     "react-dom": "^17.0.2",
     "react-paypal-express-checkout": "^1.0.5",
     "react-redux": "^7.2.3",

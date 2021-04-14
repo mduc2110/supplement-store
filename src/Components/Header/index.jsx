@@ -22,7 +22,7 @@ function Header(props) {
                     <Link to="/">Homepage</Link>
                     <Link to="/product">Product</Link>
                     <Link to="/about">About</Link>
-                    <Link to="/about">Blog</Link>
+                    <Link to="/blog">Blog</Link>
                     <Link to="/Cart" className="cart">Cart <span className="cartCount">{cart.cartList.length}</span></Link>
                 </nav>
 
@@ -34,7 +34,7 @@ function Header(props) {
                     </nav>
                     :<nav className="nav__action">
                         <Link to="/login" className="loginBtn">Sign in</Link>
-                        <Link to="/register"  className="registBtn">Sign up</Link>
+                        <Link to="/sign-up"  className="registBtn">Sign up</Link>
                     </nav>
                 }
                 {/* <nav className="nav__action">

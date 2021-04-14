@@ -4,14 +4,17 @@ import './order.css'
 import OrderItem from './OrderItem'
 import {getToken} from '../../../utils/Common'
 import { useParams } from 'react-router'
+import Loader from '../../Loader'
 function Order(props) {
     const {status} = useParams();
     const [filteredList, setFilteredList] = useState([]);
+
     useEffect(() => {
         setFilteredList(props.list.filter(item => item.status === status));
     }, [])
-    console.log(props.list.filter(item => item.status === status));
     return (
+        props.loading?<Loader/>
+        :
         <div className="order">
             {
                 props.list.filter(item => item.status === status)

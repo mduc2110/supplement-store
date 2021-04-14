@@ -10,7 +10,7 @@ function OrderItem(props) {
                 item.items.map(element => (
                     <div className="flex item">
                         <div className="thumbnail">
-                            <img src={`http://localhost:3333/${element.imgUrl[0]}`} alt=""/>
+                            <img src={`https://supplements-soa.herokuapp.com/${element.imgUrl[0]}`} alt=""/>
                         </div>
                         <div className="detail">
                             <h3>{element.name}</h3>

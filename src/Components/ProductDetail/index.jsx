@@ -5,7 +5,7 @@ import './productDetail.css'
 import Loader from '../Loader';
 import { useDispatch, useSelector } from 'react-redux';
 import {addCart} from '../../actions/cart';
-
+import productApi from '../../api/productApi';
 
 function ProductDetail(props) {
     const [loading, setLoading] = useState(true);
@@ -21,15 +21,16 @@ function ProductDetail(props) {
         maxLength: 0
     })
     const dispatch = useDispatch();
-    // console.log({e: cart});
-    useEffect(() => {
-        axios.get(`http://localhost:3333/api/products/${prodId}`)
-            .then(res => {
-                setProductDetail(res.data)
-                setLoading(false)
-                console.log(productDetail);
-            })
-            .catch(err => console.log(err));
+    useEffect(async () => {
+        try {
+            const response = await productApi.get(prodId);
+            setProductDetail(response.data)
+            setLoading(false)    
+        } catch (error) {
+            setLoading(false)
+            alert('cannot get product');
+        }
+        
     }, [])
 
     const handleAddToCart = (id) => {
@@ -87,14 +88,14 @@ function ProductDetail(props) {
             :<div className="product__detail">
                 <div className="main__layout">
                     <div className="imgArea">
-                        <img src={`http://localhost:3333/${productDetail.imgUrl[0]}`} alt=""/>
+                        <img src={`https://supplements-soa.herokuapp.com/${productDetail.imgUrl[0]}`} alt=""/>
                     </div>
                     <div className="detailArea">
                         <h2>{productDetail.productName}</h2>
                         {
                             productDetail.discount == 0
                             ?(
-                                <span className="price">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}</span>
+                                <span className="price">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</span>
                             ):
                             <>
                                 <span className="oldPrice">{parseInt(productDetail.price).toLocaleString(undefined, {maximumFractionDigits: 2, minimumFractionDigits: 2})}$</span>
@@ -114,7 +115,7 @@ function ProductDetail(props) {
                                     selectedOption.flavour==""?null
                                     :<>
                                         <span>{selectedOption.flavour}  </span>
-                                        <i>(Còn {selectedOption.maxLength} sản phẩm)</i>
+                                        <i>({selectedOption.maxLength} products left)</i>
                                     </>
                                 }
                                 </span>

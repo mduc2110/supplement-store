@@ -1,4 +1,5 @@
 import axios from "axios"
+import productApi from "../api/productApi";
 import { getToken } from "../utils/Common";
 
 const FETCH_PRODUCTS = 'FETCH_ALL';
@@ -6,13 +7,11 @@ const CREATE = 'CREATE';
 
 export const getProducts = () => async (dispatch) => {
     try {
-        axios.get('http://localhost:3333/api/products')
-        .then(res => {
-            dispatch({
-                type: FETCH_PRODUCTS,
-                payload: res.data
-            });
-        })
+        const response = await productApi.getAll();
+        dispatch({
+            type: FETCH_PRODUCTS,
+            payload: response.data
+        });
     } catch (error) {
         console.log(error);
     }
@@ -20,17 +19,19 @@ export const getProducts = () => async (dispatch) => {
 export const createProduct = (product) => async (dispatch) => {
 
     try {
-        axios.post('http://localhost:3333/api/products', product, {
+        
+        const response = await axios.post('https://supplements-soa.herokuapp.com/api/products', product,
+        {
             headers: {
                 'access-token': getToken()
             }
         })
-        .then(res => {
-            dispatch({
-                type: CREATE,
-                payload: res.data
-            });
-        })
+        console.log(response);
+        // const response = await productApi.add(product);
+        dispatch({
+            type: CREATE,
+            payload: response.data
+        });
     } catch (error) {
         console.log(error);
     }

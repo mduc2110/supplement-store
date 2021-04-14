@@ -1,0 +1,16 @@
+.signup{
+    width: 300px;
+    margin: 100px auto;
+}
+.signup form{}
+.signup form input{
+    margin-bottom: 20px;
+
+}
+.signup form a{
+    font-size: .8em;
+}
+.signup form button{
+    border-radius: 0;
+    margin: 5px 0 20px;
+}

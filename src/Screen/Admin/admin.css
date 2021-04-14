@@ -92,6 +92,7 @@ a{color: #fff; text-decoration: none;}
 
 .body-wrapper{
     width: 100%;
+    background-color: #000;
 }
 
 .main-panel{
@@ -103,3 +104,16 @@ a{color: #fff; text-decoration: none;}
 .main-panel>*{margin-bottom: 1.75rem;}
 .main-panel>*:last-child{margin-bottom: 0}
 
+
+
+.overlay{
+    background-color: rgba(255, 255, 255, .3);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+    height: 100vh;
+    /* display: none; */
+}

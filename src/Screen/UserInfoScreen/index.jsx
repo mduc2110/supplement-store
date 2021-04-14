@@ -7,15 +7,17 @@ import { getToken } from '../../utils/Common';
 import './userInfoScreen.css';
 function UserInfoScreen() {
     const { path, url } = useRouteMatch();
+    const [loading, setLoading] = useState(true);
     const [ordersList, setOrdersList] = useState([]);
     useEffect( async () => {
         try {
-            const response = await axios.get('http://localhost:3333/api/orders/orders', {
+            const response = await axios.get('https://supplements-soa.herokuapp.com/api/orders/orders', {
                 headers: {
                     'access-token': getToken()
                 }
             });
             setOrdersList(response.data);
+            setLoading(false);
         } catch (error) {
             
         }
@@ -34,7 +36,7 @@ function UserInfoScreen() {
                 <Switch>
                     <Route exact path={`${path}/:status`}
                         render={(props) => (
-                            <Order {...props} list={ordersList}/>
+                            <Order {...props} list={ordersList} loading={loading}/>
                         )}
                     />
                 </Switch>

@@ -1,14 +1,4 @@
-.overlay{
-    background-color: rgba(255, 255, 255, .3);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    position: fixed;
-    z-index: 99;
-    height: 100vh;
-    /* display: none; */
-}
+
 
 .add-product{
     width: 1000px;

@@ -9,6 +9,7 @@ import CheckoutScreen from '../CheckoutScreen';
 import ProtectedRouteUser from '../../utils/ProtectedRouteUser';
 import UserInfoScreen from '../UserInfoScreen';
 import Footer from '../../Components/Footer';
+import Signup from '../Signup';
 
 // import HomeBanner from './Components/HomeBanner';
 function MainScreen() {
@@ -22,6 +23,7 @@ function MainScreen() {
                 <Route exact path="/cart" component={CartScreen}/>
                 <Route path="/info" component={UserInfoScreen}/>
                 <Route exact path="/login" component={Login}/>
+                <Route exact path="/sign-up" component={Signup}/>
                 {/* <Route exact path="/checkout" component={CheckoutScreen}/> */}
                 <ProtectedRouteUser path="/checkout" component={CheckoutScreen}/>
             </Switch>

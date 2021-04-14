@@ -1,7 +1,14 @@
-const ordersReducer = (state = [], action) => {
+const initialState = {
+    orders: [],
+    loading: false
+}
+const ordersReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_ORDER':
-            return action.payload;
+            return {
+                orders: action.payload,
+                loading: !state.loading
+            };
         case 'CREATE':
             return [...state, action.payload];
         default:

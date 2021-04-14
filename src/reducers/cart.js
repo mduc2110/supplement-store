@@ -77,6 +77,9 @@ const cartReducer = (state = initialState, action) => {
             }
             localStorage.setItem("cart", JSON.stringify(newListRemoved));
             return newListRemoved;
+        case 'REMOVE_ALL':
+            localStorage.removeItem("cart");
+            return initialState;
         default:
             return state;
     }
