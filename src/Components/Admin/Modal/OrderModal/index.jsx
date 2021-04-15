@@ -1,28 +1,36 @@
 import axios from 'axios'
 import React from 'react'
+import orderApi from '../../../../api/orderApi';
 import { getToken } from '../../../../utils/Common';
 import './orderModal.css'
 function OrderModal(props) {
     const {order} = props;
     const handleSendShippingOrder = async () => {
-        const postData = {
-            _id: order._id,
-            note: order.note,
-            to_name: order.to_name,
-            to_phone: order.phone,
-            to_address: order.address,
-            to_ward_code: order.ward.id,
-            to_district_id: order.district.id,
-            cod_amount: order.payment_method==='COD'?order.total_amount:0,
-            items: order.items
-        }
-        const response = await axios.post('https://supplements-soa.herokuapp.com/api/orders/order-create',
-        postData, {
-            headers: {
-                'access-token': getToken()
+        try {
+            
+            const postData = {
+                _id: order._id,
+                note: order.note,
+                to_name: order.to_name,
+                to_phone: order.phone,
+                to_address: order.address,
+                to_ward_code: order.ward.id,
+                to_district_id: order.district.id,
+                cod_amount: order.payment_method==='COD'?order.total_amount:0,
+                items: order.items
             }
-        });
-        alert('success');
+            const response =await orderApi.createShipping(postData);
+            // const response = await axios.post('http://localhost:3333/api/orders/order-create',
+            // postData, {
+            //     headers: {
+            //         'access-token': getToken()
+            //     }
+            // });
+            console.log(response.data);
+            alert('success');
+        } catch (error) {
+            console.log(error.message);
+        }
     }
     return (
         props.isOpen?

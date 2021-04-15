@@ -125,6 +125,7 @@ function AddProduct(props) {
             imgUrl: imgFiles,
             options
         };
+        console.log(data.options);
         const formData = new FormData();
 
         Object.keys(data).forEach(item => {

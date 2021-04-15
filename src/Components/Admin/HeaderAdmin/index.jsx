@@ -4,7 +4,7 @@ function HeaderAdmin() {
     return (
         <div>
              <div className="header-admin">
-                <input type="text"/>
+                {/* <input type="text"/> */}
             </div>
         </div>
     )

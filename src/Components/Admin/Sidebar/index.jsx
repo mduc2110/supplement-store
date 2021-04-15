@@ -8,7 +8,7 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <h1 style={{color: "#fff", padding: ".5em"}}><Link to={`${path}`}>WHEY</Link></h1>
+            <h1 style={{color: "#fff", padding: ".5em"}}><Link to={`/`}>WHEY</Link></h1>
             <ul className="nav">
                 <li><NavLink to={`${url}/dashboard`}>Dashboard </NavLink></li>
                 <li><NavLink to={`${url}/product`}>Product</NavLink></li>
